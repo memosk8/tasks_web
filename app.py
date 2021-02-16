@@ -9,6 +9,4 @@ def new():
 
 @app.route("/")
 def tasks( tasks = ("check email", "do laundry", "call bernie") ):
-    return render_template('tasks.html', tasks=tasks)  
-
- 
+    return render_template('tasks.html', tasks=tasks)
