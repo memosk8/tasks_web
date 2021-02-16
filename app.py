@@ -1,12 +1,18 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect
 
 app = Flask(__name__)
-#tasks = ("check email", "do laundry", "call bernie")
 
-@app.route("/new/")
-def new():
-    return render_template('new.html') 
+tareas = []
 
 @app.route("/")
-def tasks( tasks = ("check email", "do laundry", "call bernie") ):
-    return render_template('tasks.html', tasks=tasks)
+def home():
+	return render_template("index.html", tareas=tareas)
+
+@app.route("/agregar", methods=["GET", "POST"])
+def agregar():
+	if request.method == "GET":
+		return render_template("agregar.html")
+	else:
+		tarea = request.form.get("tarea")
+		tareas.append(tarea)
+		return redirect("/")
